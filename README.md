@@ -10,6 +10,5 @@ The application and the database are running in Docker containers.
 
 ```bash
 cd expense-tracker
-mvn clean install 
 docker compose up -d
 ```
