@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  expense-tracker:
+    container_name: expense-tracker
+    image: expense-tracker:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    depends_on:
+      - mysqldb
+    environment:
+      DATABASE_HOST: mysqldb
+      DATABASE_USER: gjergji #gjergji
+      DATABASE_PASSWORD: 12345
+      DATABASE_NAME: expensedb
+      DATABASE_PORT: 3306
+    expose:
+      - "8080"
+
+  mysqldb:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: expensedb
+      MYSQL_USER: gjergji
+      MYSQL_PASSWORD: 12345
